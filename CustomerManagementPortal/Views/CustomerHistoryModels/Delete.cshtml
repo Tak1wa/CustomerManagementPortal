@@ -1,0 +1,48 @@
+﻿@model CustomerManagementPortal.Models.CustomerHistoryModel
+
+@{
+    ViewBag.Title = "履歴削除";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<h3>削除して宜しいですか</h3>
+<div>
+    @Html.HiddenFor(model => model.CustomerId)
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.VisitDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VisitDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Content)
+        </dt>
+        
+        <dd>
+            @Html.DisplayFor(model => model.Content)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Comment)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Comment)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="削除" class="btn btn-default" /> |
+            @Html.ActionLink("取引履歴に戻る", "Index", new { id = Model.CustomerId })
+        </div>
+    }
+</div>

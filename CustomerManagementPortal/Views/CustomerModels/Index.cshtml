@@ -1,0 +1,51 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IEnumerable<CustomerManagementPortal.Models.CustomerModel>
+
+@{
+    ViewBag.Title = "顧客一覧";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    @Html.ActionLink("新規登録", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tel)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tel)
+        </td>
+        <td>
+            @Html.ActionLink("編集", "Edit", new { id=item.CustomerId }) |
+            @Html.ActionLink("取引履歴", "index", "CustomerHistoryModels", new { id=item.CustomerId }, null) |
+            @Html.ActionLink("削除", "Delete", new { id=item.CustomerId })
+        </td>
+    </tr>
+}
+
+</table>
+
+@Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page, pageSize = ((IPagedList)Model).PageSize }))
+
+
